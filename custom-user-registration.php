@@ -41,3 +41,6 @@ add_action('wp_enqueue_scripts', 'custom_user_registration_enqueue_scripts');
 
 // Activar el controlador de registro
 $registration_controller = new User_Registration_Controller();
+// Activar el controlador de login
+$login_controller = new User_Login_Controller();
+

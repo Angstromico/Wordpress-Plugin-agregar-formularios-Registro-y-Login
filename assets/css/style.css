@@ -1,0 +1,147 @@
+/* Estilos mejorados */
+#registration-form,
+#login-form {
+  max-width: 1200px;
+  margin: 2rem auto;
+  padding: 2rem;
+  background: #ffffff;
+  border-radius: 15px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  /* Añade estas propiedades: */
+  width: 100%; /* Asegura que tome el ancho completo disponible */
+  align-self: stretch; /* Hace que el contenedor se estire */
+}
+
+#registration-form > *,
+#login-form > * {
+  width: 100%; /* Hace que los elementos hijos tomen el ancho completo */
+  max-width: 100%; /* Evita que excedan el ancho del contenedor */
+}
+
+.form-group {
+  margin-bottom: 1.5rem;
+}
+
+label {
+  display: block;
+  margin-bottom: 0.5rem;
+  font-weight: 600;
+  color: #333;
+  font-size: 0.95rem;
+  margin-top: 1rem;
+}
+
+input[type='text'],
+input[type='email'],
+input[type='password'],
+input[type='file'],
+select {
+  width: 100%;
+  padding: 0.8rem;
+  border: 2px solid #e1e1e1;
+  border-radius: 8px;
+  font-size: 1rem;
+  transition: border-color 0.3s, box-shadow 0.3s;
+  background-color: #f8f9fa;
+}
+
+input[type='text']:focus,
+input[type='email']:focus,
+input[type='password']:focus,
+select:focus {
+  outline: none;
+  border-color: #4a90e2;
+  box-shadow: 0 0 0 3px rgba(74, 144, 226, 0.1);
+}
+
+select {
+  appearance: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%23333' d='M6 8L1 3h10z'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 1rem center;
+  padding-right: 2.5rem;
+}
+
+input[type='file'] {
+  padding: 0.6rem;
+  background: #f8f9fa;
+  border: 2px dashed #e1e1e1;
+}
+
+input[type='submit'] {
+  width: 100%;
+  padding: 1rem;
+  background: #4a90e2;
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.3s;
+  margin-top: 3rem;
+}
+
+input[type='submit']:hover {
+  background: #357abd !important;
+}
+
+.error-message {
+  color: #dc3545;
+  font-size: 0.9rem;
+  margin-top: 0.5rem;
+  padding: 0.5rem;
+  border-radius: 4px;
+  background-color: rgba(220, 53, 69, 0.1);
+}
+
+.success-message {
+  color: #28a745;
+  font-size: 0.9rem;
+  margin-top: 0.5rem;
+  padding: 0.5rem;
+  border-radius: 4px;
+  background-color: rgba(40, 167, 69, 0.1);
+}
+
+#vendedor-message {
+  background-color: #fff3cd;
+  border: 1px solid #ffeeba;
+  color: #856404;
+  padding: 0.75rem;
+  border-radius: 8px;
+  margin: 1rem 0;
+}
+
+/* Indicador de fortaleza de contraseña */
+.password-strength {
+  margin-top: 0.5rem;
+  font-size: 0.9rem;
+}
+
+.strength-meter {
+  height: 4px;
+  background: #e1e1e1;
+  margin-top: 0.5rem;
+  border-radius: 2px;
+}
+
+.strength-meter div {
+  height: 100%;
+  border-radius: 2px;
+  transition: width 0.3s;
+}
+
+.weak {
+  background: #dc3545;
+}
+.medium {
+  background: #ffc107;
+}
+.strong {
+  background: #28a745;
+}

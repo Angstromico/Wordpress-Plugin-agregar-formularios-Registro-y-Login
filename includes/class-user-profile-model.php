@@ -1,50 +1,39 @@
 <?php
 
+if (!defined('ABSPATH')) exit;
+
 class User_Profile_Model {
-    // Método para registrar un usuario
-    public function register_user($username, $email, $password, $profile_image = null) {
-        // Verificar que no exista un usuario con el mismo nombre o correo
-        if (username_exists($username) || email_exists($email)) {
-            return new WP_Error('registration_error', 'El usuario o correo ya están en uso.');
-        }
-
-        // Crear un nuevo usuario
-        $user_id = wp_create_user($username, $password, $email);
-
-        if (is_wp_error($user_id)) {
-            return $user_id; // Retorna el error si no se pudo crear el usuario
-        }
-
-        // Actualizar el rol a "cliente" de WooCommerce
-        $user = new WP_User($user_id);
-        $user->set_role('customer');
-
-        // Guardar la imagen de perfil si existe
-        if ($profile_image) {
-            $this->save_profile_image($user_id, $profile_image);
-        }
-
-        return $user_id;
+    public function __construct() {
+        add_shortcode('custom_user_profile', [$this, 'display_user_profile']);
     }
 
-    // Método para guardar la imagen de perfil
-    private function save_profile_image($user_id, $profile_image) {
-        if (!function_exists('wp_handle_upload')) {
-            require_once(ABSPATH . 'wp-admin/includes/file.php');
+    public function display_user_profile() {
+        if (!is_user_logged_in()) {
+            return '<p class="error-message">Debes iniciar sesión para ver tu perfil.</p>';
         }
 
-        $uploadedfile = $profile_image;
-        $upload_overrides = array('test_form' => false);
-        $movefile = wp_handle_upload($uploadedfile, $upload_overrides);
+        $user = wp_get_current_user();
+        $profile_image_id = get_user_meta($user->ID, 'profile_image', true);
 
-        if ($movefile && !isset($movefile['error'])) {
-            // Asignar la imagen como un meta dato del usuario
-            update_user_meta($user_id, 'profile_image', $movefile['url']);
+        // Verificar si existe una imagen de perfil en el sistema de archivos
+        $upload_dir = wp_upload_dir();
+        $file_path = $upload_dir['baseurl'] . '/profile-images/user_id=' . $user->ID;
+
+        if ($profile_image_id) {
+            // Si el ID de attachment está en la base de datos, usar la URL de WordPress
+            $profile_image_url = wp_get_attachment_url($profile_image_id);
+        } elseif (file_exists($file_path)) {
+        // Si no está registrado en la base de datos, cargar desde el directorio directamente
+        $profile_image_url = $file_path;
+        } else {
+            // Fallback a una imagen predeterminada si no hay imagen de perfil
+            $profile_image_url = $upload_dir['baseurl'] . '/profile-images/default-profile.jpg';
         }
-    }
 
-    // Método para obtener la URL de la imagen de perfil del usuario
-    public function get_profile_image_url($user_id) {
-        return get_user_meta($user_id, 'profile_image', true);
+        ob_start();
+        include plugin_dir_path(__FILE__) . '../templates/user-profile.php';
+        return ob_get_clean();
     }
 }
+
+

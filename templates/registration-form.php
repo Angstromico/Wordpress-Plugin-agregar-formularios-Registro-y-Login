@@ -46,7 +46,11 @@
     </div>
 
     <label>Imagen de Perfil (opcional):</label>
-    <input type="file" name="profile_image" accept="image/*" style="width: 100%; padding: 0.6rem; background: #f8f9fa; border: 2px dashed #e1e1e1; border-radius: 8px; margin-bottom: 1rem;">
+    <input type="file" name="profile_image" accept="image/jpeg,image/png,image/gif" style="width: 100%; padding: 0.6rem; background: #f8f9fa; border: 2px dashed #e1e1e1; border-radius: 8px; margin-bottom: 1rem;">
+
+     <div class="file-requirements" style="margin-top: 0.5rem; font-size: 0.8rem; color: #666;">
+                Formatos permitidos: JPG, PNG, GIF (Máx. 5MB)
+            </div>
 
     <input type="submit" name="submit_registration" value="Registrarse" style="width: 100%; padding: 1rem; background: #4a90e2; color: #fff; border: none; border-radius: 8px; font-size: 1rem; font-weight: 600; cursor: pointer; transition: background-color 0.3s;">
 </form>

@@ -38,7 +38,7 @@
     <label>Rol de Usuario:</label>
     <select name="user_role" id="user_role" required style="width: 100%; padding: 1rem; border: 2px solid #e1e1e1; border-radius: 8px; font-size: 1rem; transition: border-color 0.3s, box-shadow 0.3s; background-color: #f8f9fa; margin-bottom: 1rem; appearance: none; background-image: url('data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%2212%22 height=%2212%22 viewBox=%220 0 12 12%22%3E%3Cpath fill=%22%23333%22 d=%22M6 8L1 3h10z%22/%3E%3C/svg%3E'); background-repeat: no-repeat; background-position: right 1rem center; padding-right: 2.5rem;">
         <option value="customer">Cliente</option>
-        <option value="vendedor">Vendedor</option>
+        <option value="shop manager">Vendedor</option>
     </select>
 
     <div id="vendedor-message" style="display: none; color: red; font-size: 0.9em;">

@@ -62,7 +62,6 @@ class User_Registration_Controller {
             !preg_match('/[a-z]/', $password) ||
             !preg_match('/[0-9]/', $password) ||
             !preg_match('/[!@#$%^&*(),.?":{}|<>]/', $password)
-            /* Intente con esta contrasena y no me funciono: DvQzxycjg7Y6c5tA, por que no pasa la prueba? */
         ) {
             $_SESSION['custom_registration_error'] = 'La contraseña debe tener al menos 8 caracteres, una mayúscula, una minúscula, un número y un símbolo.';
             wp_redirect($_SERVER['REQUEST_URI']);
@@ -86,10 +85,17 @@ class User_Registration_Controller {
         }
 
         // Set user role
+        if ($role === 'shop manager' && wp_roles()->is_role('shop_manager')) {
+            wp_update_user([
+                'ID' => $user_id,
+                'role' => 'shop_manager'
+            ]);
+        } else {
         wp_update_user([
-            'ID' => $user_id, 
-            'role' => $role === 'vendedor' ? 'vendedor' : 'customer'
-        ]);
+            'ID' => $user_id,
+            'role' => 'customer'
+            ]);
+        }
 
         // Handle profile image upload
         if (!empty($profile_image['name'])) {

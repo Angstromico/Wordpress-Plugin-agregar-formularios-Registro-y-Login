@@ -27,7 +27,7 @@ class User_Profile_Model {
         $profile_image_url = $file_path;
         } else {
             // Fallback a una imagen predeterminada si no hay imagen de perfil
-            $profile_image_url = $upload_dir['baseurl'] . '/profile-images/default-profile.jpg';
+            $profile_image_url = plugin_dir_url(__FILE__) . '../assets/default-profile.jpg';
         }
 
         ob_start();
